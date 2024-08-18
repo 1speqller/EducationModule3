@@ -1,5 +1,1 @@
-﻿string myName = "Mikhail";
-
-Console.WriteLine(myName);
-
-Console.ReadKey();
+﻿Console.WriteLine("\x23");
