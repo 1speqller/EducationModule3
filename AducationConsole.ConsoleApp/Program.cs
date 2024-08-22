@@ -1,6 +1,13 @@
-﻿enum Semaphore : int
+﻿Console.Write("What is your favorite day of week? ");
+byte favoriteDay = (byte)int.Parse(Console.ReadLine());
+Console.WriteLine("You favorite day is {0} ", (DaysOfWeek)favoriteDay);
+
+enum DaysOfWeek : byte
 {
-    Red = 100,
-    Yellow = 200,
-    Green = 300
+    Monday = 1, 
+    Tuesday, 
+    Wednesday, 
+    Friday, 
+    Saturday,
+    Sunday
 }
