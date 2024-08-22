@@ -1,13 +1,13 @@
-﻿Console.Write("What is your favorite day of week? ");
-byte favoriteDay = (byte)int.Parse(Console.ReadLine());
-Console.WriteLine("You favorite day is {0} ", (DaysOfWeek)favoriteDay);
+﻿Console.Write("Enter you name: ");
+var name = Console.ReadLine();
 
-enum DaysOfWeek : byte
-{
-    Monday = 1, 
-    Tuesday, 
-    Wednesday, 
-    Friday, 
-    Saturday,
-    Sunday
-}
+Console.Write("Enter you age: ");
+var age = checked((byte)int.Parse(Console.ReadLine()));
+
+Console.WriteLine("Your name is {0} and age is {1} ", name, age);
+
+Console.Write("Enter you birthdate: ");
+var birthDay = Console.ReadLine();
+
+Console.Write("Yor birthdate is: {0}", birthDay);
+Console.ReadKey();
