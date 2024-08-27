@@ -1,21 +1,10 @@
 ﻿var arr = new int[] { 5, 6, 9, 1, 2, 3, 4 };
-
-int buffValue;
+int sum = 0;
 
 for (int i = 0; i < arr.Length; i++)
-{
-    for (int j = 1; j < arr.Length; j++)
-    {
-        if (arr[j-1] > arr[j])
-        {
-            buffValue = arr[j];
-            arr[j] = arr[j-1];
-            arr[j-1] = buffValue;
-        }    
-    }
-}
+    sum += arr[i];
 
-foreach(var i in arr)
-    Console.Write(i + " ");
+
+Console.WriteLine(sum);
 
 Console.ReadKey();
