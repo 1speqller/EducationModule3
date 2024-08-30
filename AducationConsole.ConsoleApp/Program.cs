@@ -1,17 +1,10 @@
-﻿static int[] GetArrayFromConsole()
+﻿static void SortArray(in int[] array, out int[] sorteddesc, out int[] sortedasc)
 {
-    var result = new int[5];
-
-    for (int i = 0; i < result.Length; i++)
-    {
-        Console.WriteLine("Введите элемент массива номер {0}", i + 1);
-        result[i] = int.Parse(Console.ReadLine());
-    }
-
-    return result;
+    sorteddesc = SortArrayDesc(array);
+    sortedasc = SortArrayAsc(array);
 }
 
-static int[] ReturnSortArray(int[] array)
+static int[] SortArrayDesc(int[] array)
 {
     int temp;
     for (int i = 0; i < array.Length; i++)
@@ -29,22 +22,20 @@ static int[] ReturnSortArray(int[] array)
     return array;
 }
 
-static void ShowArray(int[] array, bool IsSort = false) 
+static int[] SortArrayAsc(int[] array)
 {
-    if (IsSort)
+    int temp;
+    for (int i = 0; i < array.Length; i++)
     {
-        foreach (int i in ReturnSortArray(array))
+        for (int j = 0; j < array.Length; j++)
         {
-            Console.Write(i + " ");
+            if (array[i] > array[j])
+            {
+                temp = array[j];
+                array[j] = array[i];
+                array[i] = temp;
+            }
         }
     }
-    else
-    {
-        foreach (int i in array)
-        {
-            Console.Write(i + " ");
-        }
-    }
+    return array;
 }
-
-ShowArray(GetArrayFromConsole(), true);
