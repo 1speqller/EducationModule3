@@ -1,41 +1,24 @@
-﻿static void SortArray(in int[] array, out int[] sorteddesc, out int[] sortedasc)
-{
-    sorteddesc = SortArrayDesc(array);
-    sortedasc = SortArrayAsc(array);
-}
+﻿Console.WriteLine("Напишите что-то");
+var str = Console.ReadLine();
 
-static int[] SortArrayDesc(int[] array)
-{
-    int temp;
-    for (int i = 0; i < array.Length; i++)
-    {
-        for (int j = 0; j < array.Length; j++)
-        {
-            if (array[i] < array[j])
-            {
-                temp = array[j];
-                array[j] = array[i];
-                array[i] = temp;
-            }
-        }
-    }
-    return array;
-}
+Console.WriteLine("Укажите глубину эха");
+var deep = int.Parse(Console.ReadLine());
 
-static int[] SortArrayAsc(int[] array)
+Echo(str, deep);
+
+Console.ReadKey();
+
+static void Echo(string saidworld, int deep)
 {
-    int temp;
-    for (int i = 0; i < array.Length; i++)
-    {
-        for (int j = 0; j < array.Length; j++)
-        {
-            if (array[i] > array[j])
-            {
-                temp = array[j];
-                array[j] = array[i];
-                array[i] = temp;
-            }
-        }
-    }
-    return array;
+    var modif = saidworld;
+
+    if (modif.Length > 2)
+        modif = modif.Remove(0, 2);
+
+
+    Console.WriteLine("..." + modif);
+
+    if (deep > 1)
+        Echo(modif, deep - 1);
+    
 }
