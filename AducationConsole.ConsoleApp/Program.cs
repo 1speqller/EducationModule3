@@ -1,4 +1,6 @@
-﻿Console.WriteLine("Напишите что-то");
+﻿using System.Net.NetworkInformation;
+
+Console.WriteLine("Напишите что-то");
 var str = Console.ReadLine();
 
 Console.WriteLine("Укажите глубину эха");
@@ -15,10 +17,21 @@ static void Echo(string saidworld, int deep)
     if (modif.Length > 2)
         modif = modif.Remove(0, 2);
 
-
+    ChangeColor(deep);
     Console.WriteLine("..." + modif);
 
     if (deep > 1)
         Echo(modif, deep - 1);
     
+}
+
+static void ChangeColor(int id)
+{
+    ConsoleColor[] CslColor = [ ConsoleColor.Red, ConsoleColor.Blue, ConsoleColor.Green,
+                                                   ConsoleColor.Yellow, ConsoleColor.Cyan, ConsoleColor.Magenta, 
+                                                   ConsoleColor.DarkYellow, ConsoleColor.DarkGray, ConsoleColor.DarkGreen, 
+                                                   ConsoleColor.DarkMagenta];
+
+    Console.BackgroundColor = CslColor[id];
+
 }
