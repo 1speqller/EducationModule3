@@ -2,12 +2,13 @@
 {
     static void Main(string[] args)
     {
+
         ShowUserInformation(GetQuestionnaire());
     }
 
     static (string FName, string LName, int Age, bool IsPetOwner, int PetCount, int ColorCount, string[] FavoriteColors, string[] NicknamesPet) GetQuestionnaire()
     {
-        (string FName, string LName, int Age, bool IsPetOwner, int PetCount, int ColorCount, string[] FavoriteColors, string[] NicknamesPet) User;
+        (string FName, string LName, int Age, bool IsPetOwner, int PetCount, int ColorCount, string[] FavoriteColors, string[] NicknamesPet) User = new();
 
         string str;
         string num;
@@ -17,9 +18,9 @@
 
         do
         {
-            Console.Write("Ваша имя: ");
+            Console.Write("Ваше имя: ");
             str = Console.ReadLine();
-        } while (CheckStr(str));
+        } while (CheckStr(str) || str.All(char.IsDigit));
 
         User.FName = str;
 
@@ -27,7 +28,7 @@
         {
             Console.Write("Ваша фамилия: ");
             str = Console.ReadLine();
-        } while (CheckStr(str));
+        } while (CheckStr(str) || str.All(char.IsDigit));
 
         User.LName = str;
 
@@ -35,20 +36,17 @@
         {
             Console.Write("Сколько вам лет? ");
             num = Console.ReadLine();
-        } while (CheckNum(num, out intNum) && CheckStr(num));
+        } while (CheckNum(num, out intNum) || CheckStr(num));
 
         User.Age = intNum;
 
         do
         {
-            Console.Write("У вас есть питомец? Ответ запишите с маленькой буквы: ");
+            Console.Write("У вас есть питомец? да или нет: ");
             str = Console.ReadLine();
             if (str == "да")
             {
                 User.IsPetOwner = true;
-                Console.Write("Сколько у вас питомцев? ");
-                User.PetCount = Convert.ToByte(Console.ReadLine());
-
                 do
                 {
                     Console.Write("Сколько у вас питомцев? ");
@@ -58,13 +56,13 @@
                 User.PetCount = intNum;
                 User.NicknamesPet = GetPetNickname(User.PetCount);
             }
-        } while (CheckStr(str) && (str == "да" || str == "нет"));
+        } while (!(str == "да" || str == "нет") || CheckStr(str));
 
         do
         {
             Console.Write("Сколько у вас любимых цветов? ");
             num = Console.ReadLine();
-        } while (CheckNum(num, out intNum) && CheckStr(num));
+        } while (CheckNum(num, out intNum) || CheckStr(num));
 
         User.ColorCount = intNum;
         User.FavoriteColors = GetFavoriteColor(User.ColorCount);
@@ -107,12 +105,15 @@
 
     static bool CheckNum(string num, out int correctNum)
     {
-        if (int.TryParse(num, out int intNum))
+        if (num.All(char.IsDigit))
         {
-            if (intNum > 0)
+            if (int.TryParse(num, out int intNum))
             {
-                correctNum = intNum;
-                return false;
+                if (intNum > 0)
+                {
+                    correctNum = intNum;
+                    return false;
+                }
             }
         }
 
@@ -123,13 +124,28 @@
     static bool CheckStr(string str)
     {
         if (string.IsNullOrEmpty(str) || str.Length > 20)
-            return false;
+            return true;
 
-        return true;
+        return false;
     }
 
     static void ShowUserInformation((string FName, string LName, int Age, bool IsPetOwner, int PetCount, int ColorCount, string[] FavoriteColors, string[] NicknamesPet) user)
     {
-        Console.WriteLine($"{user}");
+        Console.WriteLine("Ваша анкета: ");
+        Console.WriteLine("Имя: {0}", user.FName);
+        Console.WriteLine("Фамилия: {0}", user.LName);
+        Console.WriteLine("Возраст: {0}", user.Age);
+        Console.WriteLine("Владеет питомцем: {0}", user.IsPetOwner);
+        if (user.IsPetOwner)
+        {
+            Console.Write("Список питомцев: ");
+            foreach (var pet in user.NicknamesPet)
+                Console.Write($"{pet}  ");
+        }
+        Console.WriteLine();
+
+        Console.Write("Любимые цвета: ");
+        foreach (var color in user.FavoriteColors)
+            Console.Write($"{color}  ");
     }
 }
