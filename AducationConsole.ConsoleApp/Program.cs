@@ -1,18 +1,22 @@
-﻿class ElectricEngine { }
+﻿abstract class CarEngine { }
 
-class GasEngine { }
+class ElectricEngine : CarEngine { }
 
-class Battery { }
+class GasEngine : CarEngine { }
 
-class Differential { }
+abstract class CarPart { }
 
-class Wheel { }
+class Battery : CarPart { }
 
-class Car<T>
+class Differential : CarPart { }
+
+class Wheel : CarPart { }
+
+class Car<TEngine> where TEngine : CarEngine
 {
-    public T Engine;
+    public TEngine Engine;
 
-    public virtual void ChangePart<T2>(T2 newPart)
+    public virtual void ChangePart<TCarPart>(TCarPart newPart) where TCarPart : CarPart
     {
 
     }
