@@ -1,16 +1,19 @@
-﻿class Employee
-{
-    public string Name;
-    public int Age;
-    public int Salary;
-}
+﻿class ElectricEngine { }
 
-class ProjectManager : Employee
-{
-    public string ProjectName;
-}
+class GasEngine { }
 
-class Developer : Employee
+class Battery { }
+
+class Differential { }
+
+class Wheel { }
+
+class Car<T>
 {
-    public string ProgrammingLanguage;
+    public T Engine;
+
+    public virtual void ChangePart<T2>(T2 newPart)
+    {
+
+    }
 }
