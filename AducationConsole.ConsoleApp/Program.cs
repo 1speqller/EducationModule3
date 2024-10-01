@@ -1,25 +1,19 @@
-﻿public class Drive
+﻿
+string filePath = "/Users/hoshi/Desktop/BinaryFile.bin";
+
+if (File.Exists(filePath))
 {
-    public Drive(string name, long totalSpace, long freeSpace)
+    string stringValue;
+
+    using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.Open)))
     {
-        Name = name;
-        TotalSpace = totalSpace;
-        FreeSpace = freeSpace;
+        writer.Write($"Файл изменён: {DateTime.Now} на компьютере {Environment.OSVersion}");
     }
 
-    public string Name { get; }
-    public long TotalSpace { get; }
-    public long FreeSpace { get; }
-}
-
-public class Folder
-{
-    public List<string> Files { get; set; } = new List<string>();
-
-    Dictionary<string, Folder> Folders = new Dictionary<string, Folder>();
-    public void CreateFolder(string name)
+    using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
     {
-        Folders.Add(name, new Folder());
+        stringValue = reader.ReadString();
     }
 
+    Console.WriteLine("Из файла считано: " + stringValue);
 }
